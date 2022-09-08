@@ -31,10 +31,13 @@ resource "google_container_cluster" "primary" {
 # Separately Managed Node Pool
 resource "google_container_node_pool" "primary_nodes" {
   name       = "${google_container_cluster.primary.name}-node-pool"
-  location   = var.region
+  location   = "us-central1-a"
   node_locations   = [ "us-central1-a" ]
   cluster    = google_container_cluster.primary.name
   node_count = var.gke_num_nodes
+  depends_on = [
+    google_container_cluster.primary
+  ]
 
   node_config {
     oauth_scopes = [
@@ -52,6 +55,10 @@ resource "google_container_node_pool" "primary_nodes" {
     metadata = {
       disable-legacy-endpoints = "true"
     }
+  }
+  timeouts {
+    create = "30m"
+    update = "30m"
   }
 }
 
