@@ -1,6 +1,6 @@
 variable "project_id" {
   description = "project id"
-  default = "piyushgaur-exams"
+  default = ""
 }
 
 variable "region" {
