@@ -1,6 +1,6 @@
 variable "project_id" {
   description = "project id"
-  default = ""
+  default = "project_id"
 }
 
 variable "region" {
